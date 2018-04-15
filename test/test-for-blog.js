@@ -42,7 +42,7 @@ it('should list Blog Post on GET', function () {
             expect(res).to.be.json;
             expect(res.body).to.be.a('array');
             expect(res.body.length).to.be.at.least(1);
-            const expectedKeys = ['id', 'title', 'content', 'author'];
+            const expectedKeys = ['id', 'title', 'content', 'author', 'publishDate'];
             res.body.forEach(function (item) {
                 expect(item).to.be.a('object');
                 expect(item).to.include.keys(expectedKeys);
@@ -50,7 +50,7 @@ it('should list Blog Post on GET', function () {
         });
 });
 it('should add a Blog Post on POST', function () {
-    const newItem = { title: 'Earth', content: 'The Earth is our home', author: 'Penguin' };
+    const newItem = { title: 'Earth', content: 'The Earth is our home', author: 'Penguin', publishDate: 'Jan 20, 2018' };
     return chai.request(app)
         .post('/blogpost')
         .send(newItem)
@@ -58,7 +58,7 @@ it('should add a Blog Post on POST', function () {
             expect(res).to.have.status(201);
             expect(res).to.be.json;
             expect(res.body).to.be.a('object');
-            expect(res.body).to.include.keys('id', 'title', 'content', 'author');
+            expect(res.body).to.include.keys('id', 'title', 'content', 'author', 'publishDate');
             expect(res.body.id).to.not.equal(null);
             expect(res.body).to.deep.equal(Object.assign(newItem, { id: res.body.id }));
         });
@@ -67,7 +67,8 @@ it('should update Blog Post on PUT', function () {
     const updateData = {
         title: 'Our Home',
         content: 'The Earth has always been our home',
-        auhtor: 'Penguin'
+        auhtor: 'Penguin',
+        publishDate: 'Jan 22, 2018'
     };
     return chai.request(app)
         .get('/blogpost')

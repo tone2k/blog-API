@@ -10,13 +10,13 @@ chai.use(chaiHttp);
 
 describe('Blog Post', function () {
 
-    before(function () {
-        return runServer();
-    });
+    // before(function () {
+    //     return runServer();
+    // });
 
-    after(function () {
-        return closeServer();
-    });
+    // after(function () {
+    //     return closeServer();
+    // });
 
     it('should list items on GET', function () {
 
@@ -31,7 +31,7 @@ describe('Blog Post', function () {
                 expect(res.body.length).to.be.at.least(1);
                 // each item should be an object with key/value pairs
                 // for `id`, `name` and `checked`.
-                const expectedKeys = ['id', 'title', 'content', 'author'];
+                const expectedKeys = ['id', 'title', 'content', 'author', 'publishDate'];
                 res.body.forEach(function (item) {
                     expect(item).to.be.a('object');
                     expect(item).to.include.keys(expectedKeys);
@@ -47,7 +47,8 @@ describe('Blog Post', function () {
         const newItem = {
             title: 'Hello Penguin',
             content: 'Penguins are always dressed nicely',
-            author: 'Penguin'
+            author: 'Penguin',
+            publishDate: 'Jan 19, 2018'
         };
         return chai.request(app)
             .post('/blogpost')
@@ -81,7 +82,8 @@ describe('Blog Post', function () {
         const updateData = {
             title: 'Hello Penguins',
             content: 'Penguins are always dressed wonderfully',
-            author: 'Golden Penguin'
+            author: 'Golden Penguin',
+            publishDate: 'Jan 21, 2018'
         };
 
         return chai.request(app)
