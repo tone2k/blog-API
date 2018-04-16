@@ -57,7 +57,7 @@ describe('Blog Post', function () {
                 expect(res).to.have.status(201);
                 expect(res).to.be.json;
                 expect(res.body).to.be.a('object');
-                expect(res.body).to.include.keys('id', 'title', 'content', 'author');
+                expect(res.body).to.include.keys('id', 'title', 'content', 'author', 'publishDate');
                 expect(res.body.id).to.not.equal(null);
                 // response should be deep equal to `newItem` from above if we assign
                 // `id` to it from `res.body.id`
@@ -103,7 +103,7 @@ describe('Blog Post', function () {
                     // and returns updated item
                     .then(function (res) {
                         console.log("body", res.body);
-                        expect(res).to.have.status(200);
+                        expect(res).to.have.status(204);
                         expect(res).to.be.json;
                         expect(res.body).to.be.a('object');
                         expect(res.body).to.deep.equal(updateData);

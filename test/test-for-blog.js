@@ -67,7 +67,7 @@ it('should update Blog Post on PUT', function () {
     const updateData = {
         title: 'Our Home',
         content: 'The Earth has always been our home',
-        auhtor: 'Penguin',
+        author: 'Penguin',
         publishDate: 'Jan 22, 2018'
     };
     return chai.request(app)
